@@ -31,9 +31,12 @@ public class DemoApplication implements CommandLineRunner {
 
 		System.out.println("Total Income : " + reportingService.calculateIncome(trxList) );
 		System.out.println("Total Expenses : " + reportingService.calculateTotalExpenses(trxList) );
-		System.out.println("Total Expenses : " + reportingService.calculateTotalSavings(trxList) );
+		System.out.println("Total Savings : " + reportingService.calculateTotalSavings(trxList) );
 		Map.Entry<String, BigDecimal> entry = reportingService.calculateMaxSpendCategory(trxList);
+		if(entry != null)
 		System.out.println("Top Expense Category : "+ entry.getKey() + " , Amount :"  + entry.getValue().abs() );
+		else
+		System.out.println("No Elements found");
 	}
 }
 

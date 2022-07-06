@@ -13,9 +13,10 @@ import java.io.FileNotFoundException;
 public class DataReaderServiceTests {
     DataReaderService dataReaderService = new DataReaderServiceImpl();
     @Test
-    void readDataTest_withIncorrectFile()
+    @DisplayName("Verify Read Data with Invalid File Path")
+    void readDataTest_withInvalidFilePath()
     {
-        assertThrows(FileNotFoundException.class , (Executable) dataReaderService.readData("abc"));
+        assertThrows(RuntimeException.class , () ->dataReaderService.readData("abc"));
 
     }
 
@@ -26,4 +27,22 @@ public class DataReaderServiceTests {
         assertEquals(9 , dataReaderService.readData("src/main/resources/static/statement.csv").size());
 
     }
+
+    @Test
+    @DisplayName("Verify Data read for Empty File")
+    void readDataTest_withEmptyFile()
+    {
+        assertEquals(0 , dataReaderService.readData("src/main/resources/static/emptyFile.csv").size());
+
+    }
+
+    @Test
+    @DisplayName("Verify Incorrect List count")
+    void readDataTest_verifyIncorrectListCount()
+    {
+        assertFalse(dataReaderService.readData("src/main/resources/static/statement.csv").size() == 10);
+
+    }
+
+
 }
